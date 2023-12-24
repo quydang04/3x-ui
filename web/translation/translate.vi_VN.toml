@@ -59,7 +59,7 @@
 "settings" = "Cài đặt bảng điều khiển"
 "logout" = "Đăng xuất"
 "xray" = "Xray Cài đặt"
-"link" = "sự quản lý"
+"link" = "Quản lý"
 
 [pages.login]
 "title" = "Đăng nhập"
@@ -196,7 +196,7 @@
 "postfix" = "Hậu tố"
 "delayedStart" = "Bắt đầu sau khi sử dụng lần đầu"
 "expireDays" = "Số ngày hết hạn"
-"days" = "ngày"
+"days" = "Ngày"
 "renew" = "Tự động gia hạn"
 "renewDesc" = "Tự động gia hạn những ngày sau khi hết hạn. 0 = tắt"
 
@@ -298,7 +298,7 @@
 "subURIDesc" = "Thay đổi URI cơ sở của URL đăng ký để sử dụng ở phía sau proxy"
 
 [pages.xray]
-"title" = "Xray Cài đặt"
+"title" = "Cài đặt Xray"
 "save" = "Lưu cài đặt"
 "restart" = "Khởi động lại Xray"
 "basicTemplate" = "Mẫu Cơ bản"
@@ -407,7 +407,7 @@
 "editOutbound" = "Chỉnh sửa gửi đi"
 "editReverse" = "Chỉnh sửa ngược lại"
 "tag" = "Thẻ"
-"tagDesc" = "thẻ duy nhất"
+"tagDesc" = "Mô tả thẻ"
 "address" = "Địa chỉ"
 "reverse" = "Đảo ngược"
 "domain" = "Miền"
@@ -444,9 +444,9 @@
 "day" = "Ngày"
 "days" = "Ngày"
 "hours" = "Giờ"
-"unknown" = "Không rõ"
+"unknown" = "Không biết"
 "inbounds" = "Vào"
-"clients" = "Các khách hàng"
+"clients" = "Clients"
 
 [tgbot.commands]
 "unknown" = "❗ Lệnh không rõ"
