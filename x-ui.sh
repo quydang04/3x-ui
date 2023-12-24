@@ -35,36 +35,35 @@ fi
 
 echo "The OS release is: $release"
 
-os_version=""
 os_version=$(grep -i version_id /etc/os-release | cut -d \" -f2 | cut -d . -f1)
 
-if [[ "${release}" == "centos" ]]; then
-    if [[ ${os_version} -lt 8 ]]; then
-        echo -e "${red} Please use CentOS 8 or higher ${plain}\n" && exit 1
-    fi
-elif [[ "${release}" == "ubuntu" ]]; then
-    if [[ ${os_version} -lt 20 ]]; then
-        echo -e "${red}please use Ubuntu 20 or higher version! ${plain}\n" && exit 1
-    fi
-elif [[ "${release}" == "fedora" ]]; then
-    if [[ ${os_version} -lt 36 ]]; then
-        echo -e "${red}please use Fedora 36 or higher version! ${plain}\n" && exit 1
-    fi
-elif [[ "${release}" == "debian" ]]; then
-    if [[ ${os_version} -lt 10 ]]; then
-        echo -e "${red} Please use Debian 10 or higher ${plain}\n" && exit 1
-    fi
-elif [[ "${release}" == "almalinux" ]]; then
-    if [[ ${os_version} -lt 9 ]]; then
-        echo -e "${red} Please use Almalinux 9 or higher ${plain}\n" && exit 1
-    fi
-elif [[ "${release}" == "arch" ]]; then
-    echo "Your OS is ArchLinux"
-elif [[ "${release}" == "manjaro" ]]; then
-    echo "Your OS is Manjaro"
-elif [[ "${release}" == "armbian" ]]; then
-    echo "Your OS is Armbian"
-fi
+case "${release}" in
+    "centos")
+        [[ ${os_version} -lt 8 ]] && echo -e "${red} Please use CentOS 8 or higher ${plain}\n" && exit 1
+        ;;
+    "ubuntu")
+        [[ ${os_version} -lt 20 ]] && echo -e "${red}please use Ubuntu 20 or higher version!${plain}\n" && exit 1
+        ;;
+    "fedora")
+        [[ ${os_version} -lt 36 ]] && echo -e "${red}please use Fedora 36 or higher version!${plain}\n" && exit 1
+        ;;
+    "debian")
+        [[ ${os_version} -lt 10 ]] && echo -e "${red} Please use Debian 10 or higher ${plain}\n" && exit 1
+        ;;
+    "almalinux")
+        [[ ${os_version} -lt 9 ]] && echo -e "${red} Please use AlmaLinux 9 or higher ${plain}\n" && exit 1
+        ;;
+    "rocky")
+        [[ ${os_version} -lt 9 ]] && echo -e "${red} Please use Rocky Linux 9 or higher ${plain}\n" && exit 1
+        ;;
+    "arch"|"manjaro"|"armbian")
+        echo "Your OS is ${release^}"
+        ;;
+    *)
+        echo -e "${red}Failed to check the OS version, please contact the author!${plain}" && exit 1
+        ;;
+esac
+
 
 
 # Declare Variables
@@ -609,7 +608,7 @@ ssl_cert_issue() {
     case "${release}" in
         ubuntu|debian|armbian)
             apt update && apt install socat -y ;;
-        centos)
+        centos|almalinux|rocky)
             yum -y update && yum -y install socat ;;
         fedora)
             dnf -y update && dnf -y install socat ;;
