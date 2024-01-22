@@ -31,7 +31,11 @@ jobs:
           Compress-Archive -Path 3x-ui/* -DestinationPath 3x-ui.zip
 
       - name: Upload
-        uses: actions/upload-artifact@v2
+        uses: svenstaro/upload-release-action@2.7.0
         with:
-          name: 3x-ui
-          path: 3x-ui.zip
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ github.ref }}
+          file: 3x-ui.zip
+          asset_name: 3x-ui.zip
+          prerelease: true
+          overwrite: true
