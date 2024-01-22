@@ -35,7 +35,7 @@ jobs:
           Move-Item -Path xui-release -Destination x-ui/
           Copy-Item -Path x-ui.service -Destination x-ui/
           Copy-Item -Path x-ui.sh -Destination x-ui/
-          Rename-Item -Path x-ui/xui-release -NewName x-ui/x-ui
+          Rename-Item -Path x-ui/xui-release -NewName x-ui/x-ui-release
           New-Item -ItemType Directory -Force -Path x-ui/bin
           Set-Location -Path x-ui/bin
           
