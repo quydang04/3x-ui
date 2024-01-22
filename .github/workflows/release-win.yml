@@ -1,65 +1,37 @@
-name: Release 3X-UI
+name: Compile and Package 3X-UI
 
 on:
   push:
-    tags:
-      - "*"
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:
   build:
-    strategy:
-      matrix:
-        platform:
-          - amd64
-        os:
-          - windows-2019
-    runs-on: ${{ matrix.os }}
+    runs-on: windows-2019
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4.1.1
+        with:
+          repository: 'MHSanaei/3x-ui'
+          path: './3x-ui'
 
       - name: Setup Go
         uses: actions/setup-go@v5.0.0
         with:
           go-version: '1.21'
 
-      - name: Build x-ui
+      - name: Build 3X-UI
         run: |
-          $env:CGO_ENABLED="1"
-          $env:GOOS="windows"
-          $env:GOARCH="${{ matrix.platform }}"
-          go build -o xui-release -v main.go
-          
-          New-Item -ItemType Directory -Force -Path C:\Downloads\x-ui
-          Move-Item -Path xui-release -Destination C:\Downloads\x-ui\
-          Copy-Item -Path x-ui.service -Destination C:\Downloads\x-ui\
-          Copy-Item -Path x-ui.sh -Destination C:\Downloads\x-ui\
-          Rename-Item -Path C:\Downloads\x-ui\xui-release -NewName x-ui\x-ui-release
-          New-Item -ItemType Directory -Force -Path C:\Downloads\x-ui\bin
-          Set-Location -Path C:\Downloads\x-ui\bin
-          
-          # Download dependencies
-          $Xray_URL="https://github.com/XTLS/Xray-core/releases/download/v1.8.7/"
-          if (${{ matrix.platform }} -eq "amd64") {
-            Invoke-WebRequest -Uri ${Xray_URL}Xray-windows-64.zip -OutFile Xray-windows-64.zip
-            Expand-Archive -Path Xray-windows-64.zip -DestinationPath .
-            Remove-Item -Path Xray-windows-64.zip
-          }
-          Remove-Item -Path geoip.dat, geosite.dat
-          Invoke-WebRequest -Uri https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geoip.dat -OutFile geoip.dat
-          Invoke-WebRequest -Uri https://github.com/Loyalsoldier/v2ray-rules-dat/releases/latest/download/geosite.dat -OutFile geosite.dat
-          Invoke-WebRequest -Uri https://github.com/chocolate4u/Iran-v2ray-rules/releases/latest/download/geoip.dat -OutFile geoip_IR.dat
-          
+          cd 3x-ui
+          go build -o 3x-ui.exe -v main.go
+
       - name: Package
-        run: Compress-Archive -Path C:\Downloads\x-ui\* -DestinationPath x-ui-windows-${{ matrix.platform }}.tar.gz
-        
+        run: |
+          Compress-Archive -Path 3x-ui/* -DestinationPath 3x-ui.zip
+
       - name: Upload
-        uses: svenstaro/upload-release-action@2.7.0
+        uses: actions/upload-artifact@v2
         with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          tag: ${{ github.ref }}
-          file: x-ui-windows-${{ matrix.platform }}.tar.gz
-          asset_name: x-ui-windows-${{ matrix.platform }}.tar.gz
-          prerelease: true
-          overwrite: true
+          name: 3x-ui
+          path: 3x-ui.zip
