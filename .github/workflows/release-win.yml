@@ -1,4 +1,4 @@
-name: Release 3X-UI for Windows
+name: Release 3X-UI
 
 on:
   push:
@@ -31,13 +31,13 @@ jobs:
           $env:GOARCH="${{ matrix.platform }}"
           go build -o xui-release -v main.go
           
-          New-Item -ItemType Directory -Force -Path x-ui
-          Move-Item -Path xui-release -Destination x-ui/
-          Copy-Item -Path x-ui.service -Destination x-ui/
-          Copy-Item -Path x-ui.sh -Destination x-ui/
-          Rename-Item -Path x-ui/xui-release -NewName x-ui/x-ui-release
-          New-Item -ItemType Directory -Force -Path x-ui/bin
-          Set-Location -Path x-ui/bin
+          New-Item -ItemType Directory -Force -Path C:\Downloads\x-ui
+          Move-Item -Path xui-release -Destination C:\Downloads\x-ui\
+          Copy-Item -Path x-ui.service -Destination C:\Downloads\x-ui\
+          Copy-Item -Path x-ui.sh -Destination C:\Downloads\x-ui\
+          Rename-Item -Path C:\Downloads\x-ui\xui-release -NewName x-ui\x-ui-release
+          New-Item -ItemType Directory -Force -Path C:\Downloads\x-ui\bin
+          Set-Location -Path C:\Downloads\x-ui\bin
           
           # Download dependencies
           $Xray_URL="https://github.com/XTLS/Xray-core/releases/download/v1.8.7/"
@@ -52,7 +52,7 @@ jobs:
           Invoke-WebRequest -Uri https://github.com/chocolate4u/Iran-v2ray-rules/releases/latest/download/geoip.dat -OutFile geoip_IR.dat
           
       - name: Package
-        run: Compress-Archive -Path x-ui/* -DestinationPath x-ui-windows-${{ matrix.platform }}.tar.gz
+        run: Compress-Archive -Path C:\Downloads\x-ui\* -DestinationPath x-ui-windows-${{ matrix.platform }}.tar.gz
         
       - name: Upload
         uses: svenstaro/upload-release-action@2.7.0
