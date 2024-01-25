@@ -181,6 +181,8 @@
 "exportInbound" = "Exportación entrante"
 "import" = "Importar"
 "importInbound" = "Importar un entrante"
+"isGroupEdit" = "Edición de grupo"
+"isGroupEditDesc" = "Se editan todos los usuarios con la misma suscripción"
 
 [pages.client]
 "add" = "Agregar Cliente"
@@ -249,6 +251,7 @@
 "pageSizeDesc" = "Defina el tamaño de página para la tabla de entradas. Establezca 0 para desactivar"
 "remarkModel" = "Modelo de observación y carácter de separación"
 "datepicker" = "selector de fechas"
+"datepickerPlaceholder" = "Seleccionar fecha"
 "datepickerDescription" = "El tipo de calendario selector especifica la fecha de vencimiento"
 "sampleRemark" = "Observación de muestra"
 "oldUsername" = "Nombre de Usuario Actual"

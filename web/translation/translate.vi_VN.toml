@@ -181,6 +181,8 @@
 "exportInbound" = "Xuất nhập khẩu"
 "import" = "Nhập"
 "importInbound" = "Nhập inbound"
+"isGroupEdit" = "Chỉnh sửa nhóm"
+"isGroupEditDesc" = "Tất cả người dùng có cùng đăng ký đều được chỉnh sửa"
 
 [pages.client]
 "add" = "Thêm người dùng"
@@ -249,6 +251,7 @@
 "pageSizeDesc" = "Xác định kích thước trang cho bảng gửi đến. Đặt 0 để tắt"
 "remarkModel" = "Ghi chú mô hình và ký tự phân tách"
 "datepicker" = "Kiểu lịch"
+"datepickerPlaceholder" = "Chọn ngày"
 "datepickerDescription" = "Tác vụ chạy theo lịch trình sẽ chạy theo kiểu lịch này."
 "sampleRemark" = "Nhận xét mẫu"
 "oldUsername" = "Tên người dùng hiện tại"

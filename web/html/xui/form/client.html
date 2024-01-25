@@ -3,6 +3,18 @@
     <a-form-item label='{{ i18n "pages.inbounds.enable" }}'>
         <a-switch v-model="client.enable"></a-switch>
     </a-form-item>
+    <a-form-item v-if="isEdit && app.subSettings.enable && isGroup">
+        <template slot="label">
+            <a-tooltip>
+                <template slot="title">
+                    <span>{{ i18n "pages.inbounds.isGroupEditDesc" }}</span>
+                </template>
+                {{ i18n "pages.inbounds.isGroupEdit" }}
+                <a-icon type="question-circle"></a-icon>
+            </a-tooltip>
+        </template>
+        <a-switch v-model="isGroupEdit"></a-switch>
+    </a-form-item>
     <a-form-item>
         <template slot="label">
             <a-tooltip>
@@ -152,7 +164,7 @@
         </template>
         <a-date-picker v-if="datepicker == 'gregorian'" :show-time="{ format: 'HH:mm:ss' }" format="YYYY-MM-DD HH:mm:ss"
             :dropdown-class-name="themeSwitcher.currentTheme" v-model="client._expiryTime"></a-date-picker>
-        <persian-datepicker v-else :dropdown-class-name="themeSwitcher.currentTheme"
+        <persian-datepicker v-else placeholder='{{ i18n "pages.settings.datepickerPlaceholder" }}'
                             value="client._expiryTime" v-model="client._expiryTime"></persian-datepicker>
         <a-tag color="red" v-if="isEdit && isExpiry">Expired</a-tag>
     </a-form-item>
